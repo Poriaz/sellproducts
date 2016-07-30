@@ -1,0 +1,115 @@
+<style>
+.pagination_div > p {
+    float: left;
+    width: 50%;
+}
+.dashboard_pagi{
+	text-align:right;
+}
+.row.posting-list span{
+	width:19.8% !important;
+}
+</style>
+<?php $page_name = $this->uri->segment('2');?>
+<link href="<?php echo str_replace('/index.php','',base_url());?>assets/css/style-dashboard.css" rel="stylesheet">
+<div class="dash2 space">
+  <div class="container-fluid">
+    <div class="row light-back">
+      <div class="col-md-12 border-btm">
+        <div class="dash21">
+           <ul>
+           <li style="<?php if($page_name == 'dashboard'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/dashboard"> Postings</a></li>
+            <li style="<?php if($page_name == 'drafts'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/drafts">Drafts</a></li>
+            <li style="<?php if($page_name == 'saved_searches'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/saved_searches">Saved Searches</a></li>
+            <li style="<?php if($page_name == 'saved_items'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/saved_items"> Saved Items</a></li>
+            <li style="<?php if($page_name == 'messages'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/messages"> Messages</a></li>
+            <li style="<?php if($page_name == 'compare_items'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/compare_items"> Compare Items</a></li>
+            <li style="<?php if($page_name == 'profile'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/profile">Settings</a></li>
+            <li style="<?php if($page_name == 'changepassword'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>members/changepassword"> Change Password</a></li>
+            <li style="<?php if($page_name == 'logout'){echo "color:black;background:white;position:relative;bottom: -2px;";}?>"><a href="<?php echo base_url();?>auth/logout"> Log Out</a></li>
+          
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+      <div class="col-md-12 pagination">
+      <h4>Saved Items</h4>
+      <div class="pagination_div"><p>  ( postings 1 - 50 of 65 total )</p><p class="pagination_links dashboard_pagi"><?php echo $links; ?></p></div>
+      <div class="row posting-list">
+      <ul>
+      <li>
+      <h5>
+	  <span class="ide">id</span>
+      <span class="posting-title">Title</span>
+      <span class="area">Category</span>
+       <span class="pdate">Date</span>
+      <span class="exp">Manage</span>
+	  
+     </h5>
+ <?php 
+$i = 1;
+foreach($saved_items as $add){ 
+$images = $this->db->get_where('add_images',array('add_id' => $add['add_id']))->result_array();
+$category = $this->db->get_where('categories',array('c_id' => $add['add_category']))->result_array();
+?>
+<p class="active">
+     <span class="ide"><?php echo $add['add_id'];?></span>
+      <span class="posting-title"><a class="no_background" href="<?php echo base_url();?>add/view/<?php echo $add['add_id'];?>"><?php echo $add['add_title'];?></a></span>
+      <span class="area"><?php echo $category[0]['c_title'];?></span>
+    
+      
+      <span class="pdate"><?php echo date("d, M Y H:i",strtotime($add['created']));?></span>
+      <span class="exp">
+		
+		<a class="no_background" href="" onclick="delete_saved(<?php echo $add['add_id'];?>);return false;">Delete</a>
+		<a class="no_background" href="" onclick="compare_add(<?php echo $add['add_id'];?>);return false;" id="compare_<?php echo $add['add_id'];?>">Compare</a>
+	</span>
+      
+      </p>
+
+<?php $i++; } ?>
+      
+
+
+      
+
+      
+      </li>
+      </ul>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+function compare_add(id){
+	$.ajax({
+		url : '<?php echo base_url();?>add/compare',
+		data :{'id':id},
+		type : 'post',
+		success : function(){
+			alert("Added to compare list !");
+		}
+	     });
+
+}
+function delete_saved(id){
+	$.ajax({
+		url : '<?php echo base_url();?>add/delete_saved',
+		data :{'add_id':id},
+		type : 'post',
+		success : function(){
+			$('#saved_row_'+id).hide(0);
+		}
+	     });
+
+}
+
+</script>
+<style>
+.dash2 .col-md-12.pagination {
+  padding-top: 0;
+}
+</style>

@@ -1,0 +1,97 @@
+/*
+* jQueryTab v2.0
+* Copyright Dharma Poudel (@rogercomred)
+* Free to use under the GPLv3 license.
+* http://www.gnu.org/licenses/gpl-3.0.html
+*/
+
+/* == quick_reset */
+*{ border:none; margin:0; padding:0; outline:none;}
+
+/*  == common styles */
+
+a:focus{outline:none;text-decoration:none;}
+a:visited:hover { text-decoration:none;}
+
+pre{ border: 1px solid #ddd; box-shadow: 1px 1px 0 #fff, 2px 2px 0 #ddd; margin:10px 0; padding: 10px; background: #fcfcfc; }
+
+#container{ width:80%; padding:0px 50px; margin:0 auto;}
+
+
+
+
+/*  == tab heading */
+.tabs {    background-color: rgba(186, 186, 186, 0.17);padding: 0px 15px;border: 1px solid #ccc; overflow:hidden; }
+.tabs li{ float:left; width: 100%;}
+.tabs li a{ border-bottom: 1px solid rgb(186, 186, 186);color:#4c4b4b; display:block; font-weight:bold; padding: 15px 0px;font-family: 'Source Sans Pro-Light'; font-size:18px; }
+.tabs li:last-child a {
+    border: none;
+}
+
+.tabs li:first-child a{ border-left: none; }
+.tabs li a:hover, .tabs li a:focus{font-family: 'Source Sans Regular'; color:#000; }
+.tabs .active a{ font-family: 'Source Sans Regular';color: #000;border-bottom: 1px solid #000; }
+
+/* == accordion */
+.accordion_tabs { display:none; border-top: 1px solid #ccc; padding: 10px; font-weight: bold; background: #eee; }
+.tab_content_wrapper > .accordion_tabs:first-child{ border-top:none; }
+a.accordion_tabs:link, a.accordion_tabs:visited{ color: #21759B; }
+a.accordion_tabs:hover, a.accordion_tabs:focus{ color:#D54E21; }
+a.accordion_tabs.active{ color: #000; border-bottom: 1px solid #ccc;}
+
+/*  == tab content  */
+.tab_content_wrapper{background: transparent; border:0px solid!important;
+padding: 0px;
+height: 100%!important;
+width: 100%;
+float: left; overflow:hidden;   transition: all .3s ease-in-out .3s; }
+.tab_content{    background-color: #ECECEC!important; width: 100%;transition: all .6s ease-in-out; padding:15px;   background: #f9f8f8;    position: relative!important;
+    top: 0;
+    left: 0;
+}
+.toggle_display{display:block;}
+.toggle_position{ position:relative; }
+.toggle_border{ border:1px solid #ccc; border-width: 0 1px 1px 1px; }
+.invert_border{ border-width: 1px 1px 0 1px;}
+.tab_content_wrapper li {
+    float: left;
+    width: 23%;
+    margin: 8px;
+}
+.compare-product{padding-left: 5px;transition:all 600ms linear 0s;
+padding-right: 5px;padding-top: 53%;height: 292px;text-align: center;    position: relative;
+    }
+	.compare-product:hover {
+    box-shadow: 0px 0px 12px;}
+	.compare-text img{width:57px!important; opacity:.8; transition:all 600ms linear 0s; cursor:pointer}
+	.compare-text img:hover{ opacity:1}
+.compare-text{   background-color: rgba(0, 0, 0, 0.17);
+color: #060606;
+    height: 100%;
+padding: 11px 17px;
+font-size: 22px;font-family: 'Source Sans Pro-Light'; 
+    position: absolute;
+    top: 0;
+    left: 0;    height: 100%;}	
+	
+.compare h3{margin:20px 0px;}	
+.compare-text img{margin:20px 0px;}	
+.compare-product img{width:100%;}
+.tabs-7{float: left;
+width: 100%;
+padding-bottom: 9%;}	
+.tabs-7 h2{margin-top:0;color: #000;	font-family: 'Source Sans Regular';   top: -44px; position:absolute;
+font-size: 32px;
+left: 0;}
+	
+/* Media Queries
+***********************/
+@media screen and (max-width: 600px) {
+  #container{ width:90%; padding:40px 20px; }
+  .accordion_tabs{ display:block; }
+  .tab_content_wrapper{ height:auto !important;}
+  .tab_content{ transition:none; padding:10px;}
+  .toggle_display{display:none;}
+  .toggle_position{ position:relative; }
+  .toggle_border{ border-width: 1px; }
+}

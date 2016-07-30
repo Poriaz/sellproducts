@@ -1,0 +1,126 @@
+@CHARSET "UTF-8";
+@font-face {
+	font-family: 'Source Sans Pro-Light';
+	src: url('../font/SourceSansPro-Light.ttf');
+}
+@font-face {
+	font-family: 'Source Sans Regular';
+	src: url('../font/SourceSansPro-Regular.ttf');
+}
+@font-face {
+	font-family: 'Source Sans Semibold';
+	src: url('../font/SourceSansPro-Semibold.ttf');/* IE9 Compat Modes */
+	src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+}
+.button-back { float: left; }
+.button-next, .finish { float: right; }
+.button-back, .button-next, .finish {
+	border: 1px solid #C9C4BA; color: #7F0055; cursor: pointer;  padding: 3px 10px; text-decoration: none;
+	-khtml-border-radius: 3px; -moz-border-radius: 3px; -opera-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
+}
+/*.button-back:hover, .button-next:hover, .finish:hover { border-color: #DFDCD6; color: #B07; }*/
+
+.step {margin-top: 5px !important;
+float: left;background: rgba(186, 186, 186, 0.04);
+	border: 1px solid #DDD; clear: left; width: 100%; padding:15px;
+	-khtml-border-radius: 3px; -moz-border-radius: 3px; -opera-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
+	position: relative;
+}
+.step label {
+font-size: 16px; color: #444; display: block; font:10px; margin: 10px 0 10px 0px; font-weight:700; }
+.step legend { color: #4080BF; font:14px; padding: 0 2px 3px 2px; }
+.step input, .step textarea, .step select { height: 40px;
+padding: 0px 10px 0px 5px !important; border: 1px solid #D4D1D1; font-size: 15px;  }
+
+.error-image { background: url('../img/error.png') no-repeat right top; }
+
+.stepy-titles { border: 1px solid #bababa;
+float: left;list-style: none; margin: 0; padding: 0; width: 100%; }
+.stepy-titles li { width: 25% !important;text-align: center !important;
+font-size: 21px; margin:0!important;
+color: #4C4B4B; cursor: pointer;  float: left; padding: 10px; }
+.stepy-titles li span {  display: block; }
+.stepy-titles .current-step { color: #000; cursor: auto; background: #ccc;}
+ .tab_content_wrapper #custom-titlesli {
+    margin: 0px 0px !important;
+}
+#custom-titles span {
+    display: none;
+}
+#custom-buttons-0 {
+    margin: 0px !important;
+}
+#custom-step-0{margin-top: 5px !important; float:left;padding-bottom: 15px;}
+ 
+
+.error { background-color: #FAF4F4; }
+
+label.error { background: url('../img/alert.png') no-repeat; color: #DE5130; display: block; float: left; height: 13px; margin: 3px 3px 0 10px; padding-left: 21px; padding-top: 2px; }
+#custom-back-1{   background: #FFA200 none repeat scroll 0% 0%;
+    padding: 10px 15px;
+    font-size: 24px;
+    color: #FFF;
+    transition: all 600ms linear 0s;
+}
+#custom-next-0, #custom-next-1{  background: #FFA200 none repeat scroll 0% 0%;
+    padding: 10px 15px;
+    font-size: 24px;
+    color: #FFF;
+    transition: all 600ms linear 0s;
+}
+
+.post-1 .tab_content {
+
+    padding-bottom: 15px;}
+#custom-buttons-0, #custom-buttons-1{padding: 0px;}
+#custom-back-2{  background: #FFA200 none repeat scroll 0% 0%;
+    padding: 10px 15px;
+    font-size: 24px;
+    color: #FFF;
+    transition: all 600ms linear 0s;
+}
+#custom-next-2{ background: #FFA200 none repeat scroll 0% 0%;
+    padding: 10px 15px;
+    font-size: 24px;
+    color: #FFF;
+    transition: all 600ms linear 0s;}
+
+	#custom-buttons-3	{
+    padding: 15px;}
+	
+	#custom-back-3{ background: #FFA200 none repeat scroll 0% 0%;
+    padding: 10px 15px;
+    font-size: 24px;
+    color: #FFF;
+    transition: all 600ms linear 0s;}
+.finish {
+  background: #ffa200 none repeat scroll 0 0;
+  bottom: 20px;
+  color: #fff;
+  font-size: 24px !important;
+  height: 55px !important;
+  padding: 10px 15px;
+  position: absolute;
+  right: 34%;
+  transition: all 600ms linear 0s;
+}
+#custom-step-2 .custom-buttons {
+  bottom: 10px;
+  left: 0;
+  position: absolute;
+  width: auto;
+}	
+form#custom {
+  display: inline-block;
+  margin: 0 0 15px;
+  width:100%;	
+}
+#postad3-list li:before {     content: ' '; 
+    background-image: url('../images/tik.png');
+    width: 26px;
+    height: 25px;
+    position: absolute;
+    left: 12px;
+
+}
+	#postad3-list li{width: 100%!important;}

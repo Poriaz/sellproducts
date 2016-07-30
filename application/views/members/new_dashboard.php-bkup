@@ -1,0 +1,182 @@
+<style>
+
+.dashboard_pagi{
+	text-align:right;
+}
+.change_color{
+    cursor:pointer;
+}
+</style>
+<link href="<?php echo str_replace('/index.php','',base_url());?>assets/css/style-dashboard.css" rel="stylesheet">
+<div class="dash2 space">
+  <div class="container-fluid">
+    <div class="row light-back">
+      <div class="col-md-12 border-btm">
+        <div class="dash21">
+          <ul>
+           <li><a href="<?php echo base_url();?>members/dashboard"> Postings</a></li>
+            <li><a href="<?php echo base_url();?>members/drafts">Drafts</a></li>
+            <li><a href="<?php echo base_url();?>members/saved_searches">Saved Searches</a></li>
+            <li><a href="<?php echo base_url();?>members/saved_items"> Saved Items</a></li>
+            <li><a href="<?php echo base_url();?>members/messages"> Messages</a></li>
+			<li><a href="<?php echo base_url();?>members/compare_items"> Compare Items</a></li>
+            <li><a href="<?php echo base_url();?>members/profile">Settings</a></li>
+			<li><a href="<?php echo base_url();?>members/changepassword"> Change Password</a></li>
+			<li><a href="<?php echo base_url();?>auth/logout"> Log Out</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="posting">
+            <p>
+                Your postings: 
+                <a style="color:green;" onclick="$('#posting_type_id').val('all');$('.change_color').css('color','#0a0a0a');$(this).css('color','#222222');get_related();" class="change_color">All</a> 
+                | <a onclick="$('#posting_type_id').val('active');$('.change_color').css('color','#0a0a0a');$(this).css('color','green');get_related();"  class="change_color">Active</a>
+                | <a onclick="$('#posting_type_id').val('expired');$('.change_color').css('color','#0a0a0a');$(this).css('color','green');get_related();"  class="change_color"> Inactive</a>
+                <input type="hidden" id="posting_type_id" value="all"/>
+            </p>
+          <div class="col-md-3 posting-field">
+            <p>in category
+              <select id="catAbbc" name="filter_cat">
+               
+
+                <option value="0"> All</option>
+				<?php foreach($categories as $category){ ?>
+                <option value="<?php echo $category['c_id'];?>"> <?php echo $category['c_title'];?> </option>
+				<?php } ?>
+              </select>
+            </p>
+          </div>
+          <div class="col-md-2">
+            <input type="button"  class="srch" value="Search" onclick="get_related();">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 pagination">
+      	<div class="pging-top">
+            <h5>Showing all postings</h5>
+             <?php 
+         $param = $this->pagination->cur_page * $this->pagination->per_page;
+        if($param > $total_results || $param == 0){
+            $param = $total_results;
+        }
+         ?>
+          <div class="pagination_div"><p>( Postings <?php echo "(". $param." of ".$total_results.") total results"; ?> )</p>
+          </div>
+		 </div>
+      <div class="row posting-list">
+      <ul>
+      <li id="all_adds_posted">
+      <h5>
+      <span class="status">Status</span>
+      <span class="manage">Manage</span>
+      <span class="posting-title">Posting Title</span>
+      <span class="area">Area</span>
+      <span class="catagory">Category</span>
+      <span class="pdate">Posted Date</span>
+      <span class="exp">Expiry</span>
+      <span class="ide">id</span> 
+      </h5>
+      
+   <?php 
+$i = 1;
+foreach($advertisements as $add){ 
+$images = $this->db->get_where('add_images',array('add_id' => $add['add_id']))->result_array();
+$category = $this->db->get_where('categories',array('c_id' => $add['add_category']))->result_array();
+if(trim($add['status']) == 'active'){
+	$style = 'background:#dfd;color:black;';
+	$style_title = 'color:blue;background:none;';
+        $style_column = 'background-color:lightgreen;';
+}
+else if(trim($add['status']) == 'expired'){
+	$style = 'background:#fef;color:black;';
+	$style_title = 'color:black;background:none;';
+        $style_column = 'background-color:lightgrey;color:black;';
+} else {
+	$style = 'background:#eef;color:black;';
+	$style_title = 'color:black;background:none;';
+        $style_column = 'background-color:lightblue;color:black;';
+}
+?>
+<p class="active catclass catclass<?php echo $category[0]['c_id'];?>" id="cat_<?php echo $category[0]['c_id'];?>" >
+     	<span class="status disply 11" style="<?php echo $style_column; ?>"><?php echo $add['status'];?></span>
+        <?php if($add['status'] == 'expired' || $add['status'] == 'deleted'){?>
+        <span class="manage delete" style="<?php echo $style;?>"> <a class="no_background" href="<?php echo base_url();?>add/renew/<?php echo $add['add_id'];?>">Repost</a></span>
+     
+        <?php } else { ?>
+        <span class="manage delete" style="<?php echo $style;?>"><a href="" class="no_background" onclick="delete_add(<?php echo $add['add_id'];?>);return false;">Delete</a> / <a class="no_background" href="<?php echo base_url();?>add/edit/<?php echo $add['add_id'];?>">edit</a> / <a class="no_background" href="<?php echo base_url();?>add/renew/<?php echo $add['add_id'];?>">Renew</a></span>
+     
+        <?php } ?>
+         <span class="posting-title" style="<?php echo $style;?>"><a style="<?php echo $style_title;?>" href="<?php echo base_url();?>add/view/<?php echo $add['add_id'];?>"><?php echo $add['add_title'];?> - $<?php echo $add['add_price'];?></a></span>
+      <span class="area" style="<?php echo $style;?>"><?php echo $category[0]['c_title'];?> - <?php echo $add['add_dealer_type'];?></span>
+      <span class="catagory"></span>
+      <span class="pdate" style="<?php echo $style;?>"><?php echo date("d, M Y H:i",strtotime($add['created']));?></span>
+      <span class="exp" style="<?php echo $style;?>">Active until sold</span>
+      <span class="ide" style="<?php echo $style;?>"><?php echo $add['add_id'];?></span>
+      </p>
+
+<?php $i++; } ?>
+      </li>
+      </ul>
+      </div>
+      </div>
+ <div class="col-md-12">
+        <?php /*?><h6>Showing all postings</h6>
+         <?php 
+	 $param = $this->pagination->cur_page * $this->pagination->per_page;
+	if($param > $total_results || $param == 0){
+		$param = $total_results;
+	}
+	 ?>
+      <div class="pagination_div"><p>  Postings <?php echo "(". $param." of ".$total_results.") total results"; ?></p><?php */?>
+	  <p class="pagination_links dashboard_pagi"><?php echo $links; ?></p>
+      </div>
+ </div>
+    </div>
+  </div>
+</div>
+<script>
+function delete_add(id){
+	$.ajax({
+		url : '<?php echo base_url();?>add/delete_add',
+		data :{'add_id':id},
+		type : 'post',
+		success : function(){
+			$('#advertisement_row_'+id).hide(0);
+		}
+	     });
+
+}
+function get_related(){
+        $(".catclass").hide(0);
+        var cat = $('#catAbbc').val();
+        var visible = $("#posting_type_id").val();
+        $.ajax({
+		url : '<?php echo base_url();?>add/get_related_adds',
+		data :{'cat_id':cat,'visibility':visible},
+		type : 'post',
+		success : function(data){
+                        var jso = $.parseJSON(data);
+                        for(i=0;i< jso.length;i++){
+                            if(jso[i].status == 'active'){
+                                   var style = 'background:#7cfc00;';
+                                   var style1 = '';
+                            }
+                            else if(jso[i].status == 'expired'){
+                                    var style = 'background:#f0e68c;';
+                                    var style1 = 'color:#cb0d1a !important;';
+                            } else {
+                                    var style = '';
+                                    var style1 = '';
+                            }
+                            data = '<p class="active catclass catclass'+jso[i].add_id+'" id="cat_'+jso[i].add_id+'" style="'+style+'"><span class="ide">'+jso[i].add_id+'</span><span class="posting-title"><a class="no_background" href="'+base_url+'index.php/add/view/'+jso[i].add_id+'">'+jso[i].add_title+'</a></span><span class="area">'+jso[i].c_title+'</span><span class="pdate">'+jso[i].created+'</span><span class="exp">n/a</span><span class="delete"><a href="" class="no_background" onclick="delete_add('+jso[i].add_id+');return false;">Delete</a> / <a class="no_background" href="'+base_url+'index.php/add/edit/'+jso[i].add_id+'">edit</a> / <a class="no_background" href="'+base_url+'index.php/add/renew/'+jso[i].add_id+'">Renew</a></span><span class="disply 11" style="'+style1+'">'+jso[i].status+'</span></p>';
+                            $('#all_adds_posted').append(data);
+                            }
+                        }
+	     });
+        
+}
+
+</script>
