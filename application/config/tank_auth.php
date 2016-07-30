@@ -7,8 +7,8 @@
 | These details are used in emails sent by authentication library.
 |--------------------------------------------------------------------------
 */
-$config['website_name'] = 'FoodEquipments';
-$config['webmaster_email'] = 'collabonation@collab-o-nation.com';
+$config['website_name'] = '********';
+$config['webmaster_email'] = '**********';
 
 /*
 |--------------------------------------------------------------------------
@@ -133,8 +133,8 @@ $config['captcha_case_sensitive'] = FALSE;
 |--------------------------------------------------------------------------
 */
 $config['use_recaptcha'] = FALSE;
-$config['recaptcha_public_key'] = '6Lcl-eASAAAAALzZWVN9hER4fTbK0CSt7Y83JoAJ';
-$config['recaptcha_private_key'] = '6Lcl-eASAAAAADBuuN9RzrgiM45WkmNML9C0CtRl';
+$config['recaptcha_public_key'] = '';
+$config['recaptcha_private_key'] = '';
 
 /*
 |--------------------------------------------------------------------------
